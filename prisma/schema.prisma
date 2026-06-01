@@ -1,0 +1,248 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum ParseStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+enum SensitiveFieldType {
+  CRIMINAL_HISTORY
+  VISA_STATUS
+}
+
+enum ApplicationStatus {
+  SAVED
+  APPLIED
+  IN_REVIEW
+  INTERVIEW
+  OFFER
+  REJECTED
+  WITHDRAWN
+}
+
+enum WorkerStatus {
+  ONLINE
+  OFFLINE
+  BUSY
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  name          String?
+  passwordHash  String?
+  role          Role      @default(USER)
+  llmProvider   String?
+  llmApiKey     String?
+  emailVerified DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts      Account[]
+  sessions      Session[]
+  resumes       Resume[]
+  profile       CanonicalProfile?
+  agentConfigs  AgentConfig[]
+  applications  Application[]
+  jobFeeds      JobFeed[]
+}
+
+model Account {
+  id                String  @id @default(uuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(uuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Resume {
+  id          String      @id @default(uuid())
+  userId      String
+  fileName    String
+  fileType    String
+  fileSize    Int
+  parseStatus ParseStatus @default(PENDING)
+  rawText     String?
+  parsedData  Json?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  applications Application[]
+
+  @@index([userId])
+}
+
+model CanonicalProfile {
+  id              String   @id @default(uuid())
+  userId          String   @unique
+  contactInfo     Json?
+  experience      Json?
+  education       Json?
+  skills          Json?
+  sensitiveFields Json?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model SensitiveField {
+  id              String             @id @default(uuid())
+  userId          String
+  fieldType       SensitiveFieldType
+  value           String
+  confidence      Float
+  needsReview     Boolean            @default(true)
+  autoApproved    Boolean            @default(false)
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+
+  confirmations SensitiveFieldConfirmation[]
+
+  @@index([userId])
+}
+
+model SensitiveFieldConfirmation {
+  id                String   @id @default(uuid())
+  sensitiveFieldId  String
+  action            String
+  previousValue     String?
+  newValue          String?
+  createdAt         DateTime @default(now())
+
+  sensitiveField SensitiveField @relation(fields: [sensitiveFieldId], references: [id], onDelete: Cascade)
+}
+
+model Job {
+  id          String    @id @default(uuid())
+  source      String
+  sourceUrl   String    @unique
+  title       String
+  company     String
+  location    String?
+  description String
+  salary      Json?
+  atsSource   String?
+  jobUrl      String?
+  fetchedAt   DateTime  @default(now())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  applications Application[]
+
+  @@index([source])
+  @@index([company])
+}
+
+model Application {
+  id                String            @id @default(uuid())
+  userId            String
+  jobId             String
+  resumeId          String?
+  status            ApplicationStatus @default(SAVED)
+  agentType         String?
+  appliedAt         DateTime?
+  lastStatusUpdate  DateTime          @default(now())
+  notes             String?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  job    Job    @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  resume Resume? @relation(fields: [resumeId], references: [id])
+
+  @@unique([userId, jobId])
+  @@index([userId])
+  @@index([jobId])
+}
+
+model AgentConfig {
+  id        String   @id @default(uuid())
+  userId    String
+  agentType String
+  config    Json
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, agentType])
+  @@index([userId])
+}
+
+model WorkerNode {
+  id            String       @id @default(uuid())
+  workerId      String       @unique
+  lastHeartbeat DateTime
+  status        WorkerStatus @default(OFFLINE)
+  currentJobs   Int          @default(0)
+  maxConcurrent Int          @default(5)
+  capabilities  Json?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+}
+
+model JobFeed {
+  id          String   @id @default(uuid())
+  userId      String
+  name        String
+  keywords    String[]
+  locations   String[]
+  sources     String[]
+  notifyEmail Boolean  @default(true)
+  notifyPush  Boolean  @default(false)
+  isActive    Boolean  @default(true)
+  lastRunAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}

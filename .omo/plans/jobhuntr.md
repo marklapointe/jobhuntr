@@ -291,7 +291,7 @@ Wave FINAL (Verification):
 
 ## TODOs
 
-- [ ] 1. Project scaffolding (Next.js 14 + TypeScript + Tailwind + bun)
+- [x] 1. Project scaffolding (Next.js 14 + TypeScript + Tailwind + bun)
 
   **What to do**:
   - Initialize Next.js 14 project with App Router
@@ -363,7 +363,7 @@ Wave FINAL (Verification):
   - Message: `feat(scaffold): initialize Next.js 14 + TypeScript + Tailwind project`
   - Files: `package.json`, `tsconfig.json`, `tailwind.config.ts`, `app/`, `next.config.ts`
 
-- [ ] 2. Database schema (PostgreSQL + Prisma)
+- [x] 2. Database schema (PostgreSQL + Prisma)
 
   **What to do**:
   - Design Prisma schema for all entities (User, Resume, Profile, Job, Application, etc.)
@@ -429,7 +429,7 @@ Wave FINAL (Verification):
   - Message: `feat(db): add Prisma schema with all entities`
   - Files: `prisma/schema.prisma`, `.env.example`
 
-- [ ] 3. Authentication (NextAuth v5)
+- [x] 3. Authentication (NextAuth v5)
 
   **What to do**:
   - Configure NextAuth v5 with credentials + OAuth providers
@@ -499,7 +499,7 @@ Wave FINAL (Verification):
   - Message: `feat(auth): add NextAuth v5 with credentials + OAuth`
   - Files: `app/api/auth/[...nextauth]/route.ts`, `lib/auth.ts`, `app/(auth)/`
 
-- [ ] 4. LLM gateway abstraction layer
+- [x] 4. LLM gateway abstraction layer
 
   **What to do**:
   - Create abstract LLM provider interface
@@ -573,7 +573,7 @@ Wave FINAL (Verification):
   - Message: `feat(llm): add LLM gateway with OpenAI/Anthropic/Ollama/Custom adapters`
   - Files: `lib/llm/`, `types/llm.ts`
 
-- [ ] 5. Backend queue infrastructure (BullMQ + Redis)
+- [x] 5. Backend queue infrastructure (BullMQ + Redis)
 
   **What to do**:
   - Set up Redis connection for job queue
@@ -649,7 +649,7 @@ Wave FINAL (Verification):
   - Message: `feat(queue): add BullMQ with rate limiting and circuit breakers`
   - Files: `lib/queue/`, `workers/`
 
-- [ ] 6. Browser automation infrastructure (Playwright pool)
+- [x] 6. Browser automation infrastructure (Playwright pool)
 
   **What to do**:
   - Set up Playwright with browser binaries
@@ -723,7 +723,7 @@ Wave FINAL (Verification):
   - Message: `feat(browser): add Playwright pool with session management`
   - Files: `lib/browser/`, `workers/browser-pool.ts`
 
-- [ ] 7. Worker Node Service (distributed agent infrastructure)
+- [x] 7. Worker Node Service (distributed agent infrastructure)
 
   **What to do**:
   - Create standalone worker service that can run on separate machines
@@ -818,7 +818,7 @@ Wave FINAL (Verification):
   - Message: `feat(worker): add distributed worker node service with C2 registration`
   - Files: `worker-service/`, `lib/worker/`
 
-- [ ] 8. Resume parsing pipeline (PDF/DOCX/TXT/HTML/OCR)
+- [x] 8. Resume parsing pipeline (PDF/DOCX/TXT/HTML/OCR)
 
   **What to do**:
   - Implement PDF parsing (pdf-parse, pdf.js)
@@ -898,7 +898,7 @@ Wave FINAL (Verification):
   - Message: `feat(resume): add multi-format parsing pipeline`
   - Files: `lib/resume-parser/`, `types/resume.ts`
 
-- [ ] 9. User accounts + profile management
+- [x] 9. User accounts + profile management
 
   **What to do**:
   - Implement multi-resume support (users can have multiple resumes)
@@ -974,7 +974,7 @@ Wave FINAL (Verification):
   - Message: `feat(accounts): add multi-resume, templates, and profile management`
   - Files: `app/(dashboard)/profile/`, `lib/user/`
 
-- [ ] 10. Resume unification + canonical profile
+- [x] 10. Resume unification + canonical profile
 
   **What to do**:
   - Create canonical profile schema (normalized user data)
@@ -1032,7 +1032,7 @@ Wave FINAL (Verification):
   - Message: `feat(profile): add canonical profile with resume unification`
   - Files: `lib/profile/`, `types/profile.ts`
 
-- [ ] 11. Sensitive field confirmation workflow
+- [x] 11. Sensitive field confirmation workflow
 
   **What to do**:
   - Implement sensitive field extraction (criminal history, visa status)
@@ -1105,7 +1105,7 @@ Wave FINAL (Verification):
   - Message: `feat(sensitive): add sensitive field confirmation workflow`
   - Files: `lib/sensitive/`, `app/(dashboard)/profile/confirmation/`
 
-- [ ] 12. Job feed aggregation (ATS platforms)
+- [x] 12. Job feed aggregation (ATS platforms)
 
   **What to do**:
   - Integrate jobo-enterprise for ATS APIs (Greenhouse, Lever, Ashby, etc.)
@@ -1168,7 +1168,7 @@ Wave FINAL (Verification):
   - Message: `feat(jobs): add job feed aggregation across ATS platforms`
   - Files: `lib/job-aggregator/`, `app/api/jobs/`
 
-- [ ] 13. Job search + matching engine
+- [x] 13. Job search + matching engine
 
   **What to do**:
   - Implement semantic job matching (LLM-powered)
@@ -1226,7 +1226,7 @@ Wave FINAL (Verification):
   - Message: `feat(matching): add LLM-powered job matching engine`
   - Files: `lib/matching/`, `app/api/jobs/match/`
 
-- [ ] 14. ATS optimization scoring engine
+- [x] 14. ATS optimization scoring engine
 
   **What to do**:
   - Implement keyword density analysis (target 2.3-3.1% primary)
@@ -1289,7 +1289,7 @@ Wave FINAL (Verification):
   - Message: `feat(ats): add ATS optimization scoring engine`
   - Files: `lib/ats-scorer/`, `app/api/optimize/`
 
-- [ ] 15. AI agent orchestration (LangGraph)
+- [x] 15. AI agent orchestration (LangGraph)
 
   **What to do**:
   - Implement Scout agent (job discovery)
@@ -1360,7 +1360,7 @@ Wave FINAL (Verification):
 
 ---
 
-- [ ] 16. Application automation + form filling
+- [x] 16. Application automation + form filling
 
   **What to do**:
   - Implement Playwright-based form filling for each ATS type
@@ -1422,7 +1422,7 @@ Wave FINAL (Verification):
   - Message: `feat(apply): add ATS form filling automation`
   - Files: `lib/automation/`, `workers/form-fillers/`
 
-- [ ] 17. Session preservation for portals
+- [x] 17. Session preservation for portals
 
   **What to do**:
   - Implement browser profile persistence (cookies, localStorage)
@@ -1481,7 +1481,7 @@ Wave FINAL (Verification):
   - Message: `feat(session): add browser session persistence`
   - Files: `lib/session/`, `workers/session-manager.ts`
 
-- [ ] 18. Application tracking + status updates
+- [x] 18. Application tracking + status updates
 
   **What to do**:
   - Create application model and states (Applied, Under Review, Interview, Offer, Rejected)
@@ -1542,7 +1542,7 @@ Wave FINAL (Verification):
   - Message: `feat(tracking): add application tracking and status updates`
   - Files: `lib/tracking/`, `app/api/applications/`, `app/(dashboard)/applications/`
 
-- [ ] 19. Mobile-responsive dashboard UI
+- [x] 19. Mobile-responsive dashboard UI
 
   **What to do**:
   - Implement mobile-first responsive layout
@@ -1605,7 +1605,7 @@ Wave FINAL (Verification):
   - Message: `feat(ui): add mobile-responsive dashboard`
   - Files: `app/(dashboard)/`, `components/ui/`
 
-- [ ] 20. REST API for mobile app
+- [x] 20. REST API for mobile app
 
   **What to do**:
   - Create mobile-optimized API endpoints
@@ -1669,7 +1669,7 @@ Wave FINAL (Verification):
   - Message: `feat(api): add REST API for mobile app`
   - Files: `app/api/mobile/v1/`, `lib/api/`
 
-- [ ] 21. Agent behavior presets + overrides
+- [x] 21. Agent behavior presets + overrides
 
   **What to do**:
   - Create preset configurations (Conservative, Normal, Aggressive)
