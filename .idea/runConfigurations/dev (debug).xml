@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="dev (debug)" type="js.build_tools.npm" nameIsGenerated="false">
+    <package-json value="$PROJECT_DIR$/package.json" />
+    <command value="run" />
+    <scripts>
+      <script value="dev" />
+    </scripts>
+    <node-interpreter value="project" />
+    <envs>
+      <env name="PORT" value="3000" />
+      <env name="NODE_OPTIONS" value="--inspect-brk=0.0.0.0:9229" />
+    </envs>
+    <method v="2" />
+  </configuration>
+</component>

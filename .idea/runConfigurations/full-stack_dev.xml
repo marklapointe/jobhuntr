@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="full-stack:dev" type="CompoundRunConfigurationType">
+    <toRun name="dev" />
+    <toRun name="worker:start" />
+    <method v="2" />
+  </configuration>
+</component>

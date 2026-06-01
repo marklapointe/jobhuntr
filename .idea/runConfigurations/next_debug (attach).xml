@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="next:debug (attach)" type="NodeAttachConfigurationType" nameIsGenerated="false">
+    <option name="node-options" value="--inspect-brk=0.0.0.0:9229" />
+    <option name="working-dir" value="$PROJECT_DIR$" />
+    <method v="2" />
+  </configuration>
+</component>

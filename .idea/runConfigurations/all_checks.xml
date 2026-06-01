@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="all:checks" type="CompoundRunConfigurationType">
+    <toRun name="typecheck" />
+    <toRun name="lint" />
+    <toRun name="test" />
+    <method v="2" />
+  </configuration>
+</component>

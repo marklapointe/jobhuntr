@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="worker:start (debug)" type="js.build_tools.npm" nameIsGenerated="false">
+    <package-json value="$PROJECT_DIR$/package.json" />
+    <command value="exec" />
+    <scripts>
+      <script value="-- tsx --inspect-brk=0.0.0.0:9230 src/workers/node-service.ts" />
+    </scripts>
+    <node-interpreter value="project" />
+    <envs>
+      <env name="WORKER_ID" value="worker-1" />
+      <env name="WORKER_C2_WS_URL" value="ws://localhost:3000" />
+      <env name="REDIS_URL" value="redis://localhost:6379" />
+    </envs>
+    <method v="2" />
+  </configuration>
+</component>
